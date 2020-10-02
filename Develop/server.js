@@ -16,7 +16,7 @@ const readFileAsync = util.promisify(fs.readFile);
 //API Routes
 
 //GET api/notes
-//get data somehow from db.json
+//get data from db.json
 ///return res.json(data)---- from get notes function in index.js...
 app.get("/api/notes", function (req, res) {
     readNote().then(currNote => {
@@ -62,12 +62,17 @@ function readNote() {
 // /api/notes/id#
 //save the deleted version of the notes with that note removed--> writeFile
 //read, filter and write db array. Filter by removing req.params.id
-app.delete("/notes/:id", function (req, res) {
+app.delete("/api/notes/:id", function (req, res) {
 
-    var db = readNote();
-    let newDb = db.filter(req.params.id(db[i])[id]); 
+    readNote().then((currNote) => {
+        console.log(currNote)
+        const newDb = JSON.parse(currNote).filter(data => {
+            return req.params.id !== data.id
+        });
         writeNote(newDb);
         res.send(req.params.id);
+    });
+    
 
 })
 
