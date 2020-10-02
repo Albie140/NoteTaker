@@ -60,7 +60,7 @@ function readNote() {
 
 //DELETE /api/notes/:id
 // /api/notes/id#
-//save the deleted version of the notes with that note removed--> writeFile
+//save the version of the notes with the deleted note removed --> writeFile
 //read, filter and write db array. Filter by removing req.params.id
 app.delete("/api/notes/:id", function (req, res) {
 
