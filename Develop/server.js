@@ -7,7 +7,7 @@ const uniqid = require("uniqid")
 
 const PORT = process.env.PORT || 5000;
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -21,12 +21,13 @@ const readFileAsync = util.promisify(fs.readFile);
 app.get("/api/notes", function (req, res) {
     readNote().then(currNote => {
         console.log(currNote);
-        var parseNote = JSON.parse(currNote); 
-    return res.json(parseNote)});
-    
+        var parseNote = JSON.parse(currNote);
+        return res.json(parseNote)
+    });
+
 })
 
-function writeNote(data){
+function writeNote(data) {
     return writeFileAsync("db/db.json", JSON.stringify(data))
 }
 //POST /api/notes
@@ -35,7 +36,7 @@ function writeNote(data){
 app.post("/api/notes", function (req, res) {
     const newNote = req.body;
     const noteId = uniqid()
-    
+
     const newNoteId = {
         title: newNote.title,
         text: newNote.text,
@@ -43,23 +44,27 @@ app.post("/api/notes", function (req, res) {
     }
     readNote().then(currNote => {
         console.log(currNote);
-        var parseNote = JSON.parse(currNote); 
+        var parseNote = JSON.parse(currNote);
         parseNote.push(newNoteId)
         return parseNote
-    }) .then(combinedNote => {
+    }).then(combinedNote => {
         writeNote(combinedNote);
         res.json(combinedNote)
     })
-    
+
 });
 
-function readNote(){
+function readNote() {
     return readFileAsync("db/db.json", "utf8")
 }
 
 //DELETE /api/notes/:id
-// /api/notes/2
-//save the deleted version of the motes with that note removed--> fs.writeFile
+// /api/notes/id#
+//save the deleted version of the notes with that note removed--> writeFile
+app.delete("/notes/:id", function(req, res){
+    res.send(req.params.id);
+       
+})
 
 //HTML Routes
 app.use(express.static("public"))
