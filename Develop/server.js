@@ -1,10 +1,9 @@
 const fs = require("fs");
-const note = require("../Develop/db/db.json");
 const path = require("path");
 const express = require("express");
 const app = express();
-const db = require("./db/db.json");
 const util = require("util");
+const uniqid = require("uniqid")
 
 const PORT = process.env.PORT || 5000;
 
@@ -35,11 +34,17 @@ function writeNote(data){
 
 app.post("/api/notes", function (req, res) {
     const newNote = req.body;
+    const noteId = uniqid()
     
+    const newNoteId = {
+        title: newNote.title,
+        text: newNote.text,
+        id: noteId
+    }
     readNote().then(currNote => {
         console.log(currNote);
         var parseNote = JSON.parse(currNote); 
-        parseNote.push(newNote)
+        parseNote.push(newNoteId)
         return parseNote
     }) .then(combinedNote => {
         writeNote(combinedNote);
@@ -51,11 +56,6 @@ app.post("/api/notes", function (req, res) {
 function readNote(){
     return readFileAsync("db/db.json", "utf8")
 }
-// fs.writeFile("/api/notes", db, function (err) {
-//     if(err) {
-//     console.log("Saved!")}
-// } );
-// return res.status(200).end();
 
 //DELETE /api/notes/:id
 // /api/notes/2
