@@ -3,6 +3,7 @@ Note Taker is an application that can be used to write, save, and delete notes. 
 
 ## Usage
 To use this app, the user will click get started on the Home page. They will be navigated to a second page where they can write the new note. Click on the pencil icon in the upper right corner to start a new note. Click on the floppy dosk image to save the note. Once saved, the note will appear on the left side of the screen. To delete the note, click on the trashcan.
+Deployed app: https://note-taker00.herokuapp.com/
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
