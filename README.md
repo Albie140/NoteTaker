@@ -12,5 +12,5 @@ Deployed app: https://note-taker00.herokuapp.com/
 Please contact me at alberte.laventure@gmail.com with any questions.
 
 ## Images
-![Homepage Image](Develop/public/Homepage.png)
-![New Note Image](Develop/public/NewNote.png)
+![Homepage Image](public/Homepage.png)
+![New Note Image](public/NewNote.png)
