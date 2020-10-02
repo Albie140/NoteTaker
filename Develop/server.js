@@ -61,9 +61,14 @@ function readNote() {
 //DELETE /api/notes/:id
 // /api/notes/id#
 //save the deleted version of the notes with that note removed--> writeFile
-app.delete("/notes/:id", function(req, res){
-    res.send(req.params.id);
-       
+//read, filter and write db array. Filter by removing req.params.id
+app.delete("/notes/:id", function (req, res) {
+
+    var db = readNote();
+    let newDb = db.filter(req.params.id(db[i])[id]); 
+        writeNote(newDb);
+        res.send(req.params.id);
+
 })
 
 //HTML Routes
